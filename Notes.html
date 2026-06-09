@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,32 @@
     <title>Create Next App</title>
 
 </head>
+
 <body>
-    <header>
-        <div class="bg-[#437993] p-[16px] flex flex-col w-full">
+    <header class="bg-[#437993] p-[16px] flex flex-col w-full">
+
         <h1 class="text-white font-bold max-w-[396px] w-full text-[2.25rem] leading-[2.5rem] ml-40">Notes App</h1>
         <p class="font-light max-w-[396px] w-full text-white ml-40">Take Notes and never forget</p>
-        </div>
+
     </header>
+
+    <nav class="text-[18px] bg-[#F7F7F7] py-4 text-black mb-4 w-screen ">
+        <div class="mx-auto max-w-[700px]"><a href="index.html">Home</a></div>
+    </nav>
     <div class="flex  flex-col gap-3 mx-auto max-w-[700px]">
-    <nav class="text-[18px] bg-[#F7F7F7] p-4 text-black mb-4 w-full"><a href="index.html">Home</a></nav>
-    <main class="gap-3 flex flex-col">
-        <div><input type="text" placeholder="Type Your Notes Title" class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px]"></div>
-        <div><textarea type="text" placeholder="Type Yours Notes Body" class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px]"></textarea></div>
-        <div><button type="button" class="bg-[#437993] p-3 rounded-[8px] hover:cursor-pointer">Add Notes</button></div>       
-    </main>
+        <main class="gap-3 flex flex-col">
+            <form onsubmit="handleAddNote()">
+            <div><input id="title" type="text" placeholder="Type Your Notes Title"
+                    class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px] " required></div>
+            <div><textarea id="description" type="text" placeholder="Type Yours Notes Body"
+                    class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px] mt-3" required></textarea></div>
+            <button onclick="handleAddNote()" type="submit"
+               class="bg-[#437993] p-3 rounded-[8px] hover:cursor-pointer mt-3 text-white">Add Notes</button>
+                </form>
+        </main>
     </div>
+    </div>
+    <script src="index.js"></script>
 </body>
+
 </html>
