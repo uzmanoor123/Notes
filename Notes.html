@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body >
     <header class="bg-[#437993] p-[16px] flex flex-col w-full">
 
         <h1 class="text-white font-bold max-w-[396px] w-full text-[2.25rem] leading-[2.5rem] ml-40">Notes App</h1>
@@ -22,12 +22,12 @@
     </nav>
     <div class="flex  flex-col gap-3 mx-auto max-w-[700px]">
         <main class="gap-3 flex flex-col">
-            <form onsubmit="handleAddNote()">
+            <form onsubmit="handleAddNote()" action = "index.html">
             <div><input id="title" type="text" placeholder="Type Your Notes Title"
                     class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px] " required></div>
             <div><textarea id="description" type="text" placeholder="Type Yours Notes Body"
                     class="bg-[#F7F7F7] p-3 w-full max-w-[700px] text-[20px] mt-3" required></textarea></div>
-            <button onclick="handleAddNote()" type="submit"
+            <button type="submit"
                class="bg-[#437993] p-3 rounded-[8px] hover:cursor-pointer mt-3 text-white">Add Notes</button>
                 </form>
         </main>
