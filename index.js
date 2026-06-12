@@ -9,13 +9,13 @@ function handleAddNote(event) {
     title: Title,
     description: Description,
     date: Date.now(),
-    id: notes.length + 1
+    id: notes.length + 1,
   };
 
   notes.push(note);
   console.log(notes);
   localStorage.setItem("notes", JSON.stringify(notes));
-    window.location.href = "index.html";
+  window.location.href = "index.html";
   showNotes();
 }
 
@@ -25,14 +25,15 @@ function showNotes() {
   Container.innerHTML = "";
   notes.forEach((note) => {
     let noteDiv = document.createElement("div");
-    noteDiv.className = "noteCard";
-    noteDiv.className = "bg-[#F7F7F7] p-4  rounded";
+    noteDiv.className = "bg-[#F7F7F7] p-4  rounded noteCard";
+    noteDiv.id = note.id;
     noteDiv.addEventListener("click", function () {
       window.location.href = `http://127.0.0.1:5500/Notes.html?id=${note.id}`;
     });
     let titleDiv = document.createElement("div");
     titleDiv.className = "titleCard";
     let descriptionDiv = document.createElement("div");
+    descriptionDiv.className = "descriptionCard";
     let dateDiv = document.createElement("div");
 
     titleDiv.textContent = note.title;
@@ -63,9 +64,32 @@ function updateNote() {
   localStorage.setItem("notes", JSON.stringify(notes));
   window.location.href = "index.html";
 }
-function deleteNote(){
-notes = notes.filter(note => note.id != selectedId)
-localStorage.setItem("notes", JSON.stringify(notes))
+function deleteNote() {
+  notes = notes.filter((note) => note.id != selectedId);
+  localStorage.setItem("notes", JSON.stringify(notes));
   localStorage.setItem("notes", JSON.stringify(notes));
   window.location.href = "index.html";
+}
+function search(){
+  let value = document.getElementById("inputSearch").value.toLowerCase();
+  let cards = document.getElementsByClassName("noteCard");
+  for(let i= 0; i<cards.length; i++){
+    let title = cards[i].querySelector(".titleCard").innerText.toLowerCase();
+    let description = cards[i].querySelector(".descriptionCard").innerText.toLowerCase();
+    if(title.includes(value)|| (description.includes(value))){
+      cards[i].style.display="block"
+    }
+    else{
+      cards[i].style.display= "none"
+    }
+  } 
+}
+function sortNotes(){
+  let value = document.getElementById("sorting").value;
+if (value == "alphabets"){
+  notes.sort((a,b)=>
+    a.title.localeCompare(b.title)
+)
+}
+console.log(notes)
 }

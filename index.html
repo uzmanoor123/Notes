@@ -17,18 +17,18 @@
     </header>
     <nav class="text-[18px] bg-[#F7F7F7] py-4 text-black mb-4  flex justify-center gap-8">
         <div>
-            <input type="text" placeholder="Filter by" class="bg-white p-2" />
+            <input type="text" placeholder="Filter by" class="bg-white p-2" id="inputSearch" oninput="search()"/>
         </div>
         <div>
-            <select name="sortBy" class="bg-white p-2">
+            <select id="sorting" name="sortBy" class="bg-white p-2" onchange="sortNotes()">
                 <option value="sortBy">Sort By</option>
-                <option value="sortBy">Alphabets</option>
+                <option value="sortBy" >Alphabets</option>
                 <option value="sortBy">Last Edited</option>
                 <option value="sortBy">Recently Created</option>
             </select>
         </div>
     </nav>
-    <div class=" py-4 max-w-[800px]  gap-3 flex flex-col mx-auto" id="notesContainer">
+    <div class="ContainerDivs py-4 max-w-[800px]  gap-3 flex flex-col mx-auto" id="notesContainer">
     </div>
     <button class="bg-[#437993] p-5 rounded-[8px] hover:cursor-pointer text-white fixed bottom-5 right-5"><a
             href="Notes.html">Create New Note</a></button>
