@@ -1,3 +1,4 @@
+
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
 function handleAddNote(event) {
@@ -8,15 +9,14 @@ function handleAddNote(event) {
   let note = {
     title: Title,
     description: Description,
-    date: Date.now(),
-    id: notes.length + 1,
+    createdAt: Date.now(),
+    updatedAt:Date.now(),
+    id: crypto.randomUUID()
   };
-
   notes.push(note);
   console.log(notes);
   localStorage.setItem("notes", JSON.stringify(notes));
   window.location.href = "index.html";
-  showNotes();
 }
 
 function showNotes() {
@@ -38,7 +38,7 @@ function showNotes() {
 
     titleDiv.textContent = note.title;
     descriptionDiv.textContent = note.description;
-    dateDiv.textContent = new Date(note.date).toLocaleString();
+    dateDiv.textContent = new Date(note.createdAt).toLocaleString();
     noteDiv.appendChild(titleDiv);
     noteDiv.appendChild(descriptionDiv);
     noteDiv.appendChild(dateDiv);
@@ -49,24 +49,25 @@ function showNotes() {
 
 let params = new URLSearchParams(document.location.search);
 let selectedId = params.get("id");
-let currenNote = notes.find((note) => note.id == selectedId);
-if (currenNote) {
-  document.getElementById("title").value = currenNote.title;
-  document.getElementById("description").value = currenNote.description;
+let currentNote = notes.find((note) => note.id == selectedId);
+if (currentNote) {
+  document.getElementById("title").value = currentNote.title;
+  document.getElementById("description").value = currentNote.description;
 
   document.getElementById("addBtn").classList.add("hidden");
   document.getElementById("updateBtn").classList.remove("hidden");
   document.getElementById("deleteBtn").classList.remove("hidden");
 }
 function updateNote() {
-  currenNote.title = document.getElementById("title").value;
-  currenNote.description = document.getElementById("description").value;
+  currentNote.title = document.getElementById("title").value;
+  currentNote.description = document.getElementById("description").value;
+  currentNote.updatedAt = Date.now();
   localStorage.setItem("notes", JSON.stringify(notes));
   window.location.href = "index.html";
 }
 function deleteNote() {
+  console.log(selectedId);
   notes = notes.filter((note) => note.id != selectedId);
-  localStorage.setItem("notes", JSON.stringify(notes));
   localStorage.setItem("notes", JSON.stringify(notes));
   window.location.href = "index.html";
 }
@@ -91,5 +92,15 @@ if (value == "alphabets"){
     a.title.localeCompare(b.title)
 )
 }
-console.log(notes)
+else if (value == "edited"){
+  notes.sort((a,b)=>
+    b.updatedAt - a.updatedAt
+  )
+}
+else if (value == "created"){
+  notes.sort((a,b)=>
+    b.createdAt - a.createdAt
+  )
+}
+showNotes()
 }
